@@ -2,19 +2,19 @@ import { gql } from '@apollo/client';
 
 export const GET_ALL_GAMES = gql`
   query {
-    getNewGames {
+    newGames {
       id
       name
       release
       image
     }
-    getPopularGames {
+    popularGames {
       id
       name
       release
       image
     }
-    getUpcomingGames {
+    upcomingGames {
       id
       name
       release
@@ -25,7 +25,7 @@ export const GET_ALL_GAMES = gql`
 
 export const GET_GAME = gql`
   query GETGAME($id: ID!) {
-    getGame(id: $id) {
+    game(id: $id) {
       id
       name
       image

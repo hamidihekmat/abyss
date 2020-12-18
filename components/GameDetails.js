@@ -4,6 +4,25 @@ import { GET_GAME } from '../apollo/Queries';
 import { useQuery } from '@apollo/client';
 import Image from 'next/image';
 
+function getIcon(platform) {
+  switch (platform) {
+    case 'PlayStation 4':
+      return '/img/playstation.svg';
+    case 'PlayStation 5':
+      return '/img/playstation.svg';
+    case 'Xbox One':
+      return '/img/xbox.svg';
+    case 'PC':
+      return '/img/steam.svg';
+    case 'Nintendo Switch':
+      return '/img/nintendo.svg';
+    case 'iOS':
+      return '/img/apple.svg';
+    default:
+      return '/img/gamepad.svg';
+  }
+}
+
 function GameDetails({ id, handleToggle }) {
   const { loading, data } = useQuery(GET_GAME, {
     variables: {
@@ -16,32 +35,38 @@ function GameDetails({ id, handleToggle }) {
         <Detail layoutId={id}>
           <Stats>
             <div className="rating">
-              <h3>{data.getGame.name}</h3>
-              <p>Rating: {data.getGame.rating}</p>
+              <h3>{data.game.name}</h3>
+              <p>Rating: {data.game.rating}</p>
             </div>
             <Info>
               <h3>Platforms</h3>
               <Platforms>
-                {data.getGame.platforms.map((platform) => (
-                  <h3 key={platform.id}>{platform.name}</h3>
+                {data.game.platforms.map((platform) => (
+                  <Image
+                    src={getIcon(platform.name)}
+                    width={'25px'}
+                    height={'25px'}
+                    alt={platform.name}
+                    key={platform.id}
+                  />
                 ))}
               </Platforms>
             </Info>
           </Stats>
           <Media>
             <Image
-              src={data.getGame.image}
-              alt={data.getGame.name}
+              src={data.game.image}
+              alt={data.game.name}
               width={800}
               height={600}
               layout="responsive"
             />
           </Media>
           <Description>
-            <p>{data.getGame.description}</p>
+            <p>{data.game.description}</p>
           </Description>
           <div className="gallery">
-            {data.getGame.screenShots.map((img) => (
+            {data.game.screenShots.map((img) => (
               <Image
                 key={img.id}
                 src={img.image}
@@ -101,9 +126,11 @@ const Stats = styled(motion.div)`
 
 const Platforms = styled(motion.div)`
   display: flex;
+  width: 20vw;
   justify-content: space-evenly;
-  img {
-    margin-left: 3rem;
+  image {
+    /* margin-left: 3rem; */
+    display: block;
   }
 `;
 

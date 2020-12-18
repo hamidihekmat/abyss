@@ -4,6 +4,12 @@ import { lastYear, currentDate, nextYear } from '../../../utils/dates';
 class GamesAPI {
   static BASE_URL = 'https://api.rawg.io/api/';
 
+  static searchGames = async (name, limit = 10) => {
+    const searchURL = `${this.BASE_URL}games?search=${name}&page_size=${limit}`;
+    const { data } = await axios.get(searchURL);
+    return data.results;
+  };
+
   static getGame = async (id) => {
     const gameURL = `games/${id}`;
     const { data } = await axios.get(`${this.BASE_URL}${gameURL}`);

@@ -23,7 +23,7 @@ function Home() {
           <h2>Upcoming Games</h2>
           <Games>
             {data &&
-              data.getUpcomingGames.map((game) => (
+              data.upcomingGames.map((game) => (
                 <Game key={game.id} data={game} />
               ))}
           </Games>
@@ -32,16 +32,14 @@ function Home() {
           <h2>New Games</h2>
           <Games>
             {data &&
-              data.getNewGames.map((game) => (
-                <Game key={game.id} data={game} />
-              ))}
+              data.newGames.map((game) => <Game key={game.id} data={game} />)}
           </Games>
         </GameList>
         <GameList>
           <h2>Popular Games</h2>
           <Games>
             {data &&
-              data.getPopularGames.map((game) => (
+              data.popularGames.map((game) => (
                 <Game key={game.id} data={game} />
               ))}
           </Games>

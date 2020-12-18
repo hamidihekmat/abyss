@@ -25,9 +25,10 @@ export const typeDefs = gql`
   }
 
   type Query {
-    getPopularGames(limit: Int): [Game!]
-    getUpcomingGames(limit: Int): [Game!]
-    getNewGames(limit: Int): [Game!]
-    getGame(id: ID!): Game
+    popularGames(limit: Int): [Game!]
+    upcomingGames(limit: Int): [Game!]
+    newGames(limit: Int): [Game!]
+    game(id: ID!): Game
+    search(name: String!): [Game!]
   }
 `;
