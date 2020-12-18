@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import { motion } from 'framer-motion';
+import { motion, AnimatePresence } from 'framer-motion';
 import Image from 'next/image';
 import styled from '@emotion/styled';
 import GameDetails from './GameDetails';
@@ -12,7 +12,7 @@ function Game({ data }) {
   };
   return (
     <>
-      <StyledGame onClick={handleClick}>
+      <StyledGame layoutId={id} onClick={handleClick}>
         <h3>{name}</h3>
         <p>{release}</p>
         <Image
@@ -23,7 +23,11 @@ function Game({ data }) {
           layout="responsive"
         />
       </StyledGame>
-      {toggleDetails && <GameDetails id={id} handleToggle={handleClick} />}
+      {toggleDetails && (
+        <AnimatePresence>
+          <GameDetails layoutId={id} id={id} handleToggle={handleClick} />
+        </AnimatePresence>
+      )}
     </>
   );
 }

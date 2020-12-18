@@ -3,7 +3,7 @@ import { useQuery } from '@apollo/client';
 import { GET_ALL_GAMES } from '../apollo/Queries';
 import Game from '../components/Game';
 import styled from '@emotion/styled';
-import { motion } from 'framer-motion';
+import { motion, AnimateSharedLayout } from 'framer-motion';
 
 function Home() {
   const { loading, data } = useQuery(GET_ALL_GAMES);
@@ -18,31 +18,35 @@ function Home() {
           rel="stylesheet"
         />
       </Head>
-      <GameList>
-        <h2>Upcoming Games</h2>
-        <Games>
-          {data &&
-            data.getUpcomingGames.map((game) => (
-              <Game key={game.id} data={game} />
-            ))}
-        </Games>
-      </GameList>
-      <GameList>
-        <h2>New Games</h2>
-        <Games>
-          {data &&
-            data.getNewGames.map((game) => <Game key={game.id} data={game} />)}
-        </Games>
-      </GameList>
-      <GameList>
-        <h2>Popular Games</h2>
-        <Games>
-          {data &&
-            data.getPopularGames.map((game) => (
-              <Game key={game.id} data={game} />
-            ))}
-        </Games>
-      </GameList>
+      <AnimateSharedLayout>
+        <GameList>
+          <h2>Upcoming Games</h2>
+          <Games>
+            {data &&
+              data.getUpcomingGames.map((game) => (
+                <Game key={game.id} data={game} />
+              ))}
+          </Games>
+        </GameList>
+        <GameList>
+          <h2>New Games</h2>
+          <Games>
+            {data &&
+              data.getNewGames.map((game) => (
+                <Game key={game.id} data={game} />
+              ))}
+          </Games>
+        </GameList>
+        <GameList>
+          <h2>Popular Games</h2>
+          <Games>
+            {data &&
+              data.getPopularGames.map((game) => (
+                <Game key={game.id} data={game} />
+              ))}
+          </Games>
+        </GameList>
+      </AnimateSharedLayout>
     </>
   );
 }

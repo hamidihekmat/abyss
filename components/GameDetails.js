@@ -13,7 +13,7 @@ function GameDetails({ id, handleToggle }) {
   return (
     <CardShadow onClick={handleToggle}>
       {data && (
-        <Detail>
+        <Detail layoutId={id}>
           <Stats>
             <div className="rating">
               <h3>{data.getGame.name}</h3>
