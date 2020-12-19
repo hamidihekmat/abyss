@@ -23,6 +23,17 @@ export const GET_ALL_GAMES = gql`
   }
 `;
 
+export const SEARCH_GAME = gql`
+  query SEARCHGAME($name: String!) {
+    search(name: $name) {
+      id
+      name
+      release
+      image
+    }
+  }
+`;
+
 export const GET_GAME = gql`
   query GETGAME($id: ID!) {
     game(id: $id) {

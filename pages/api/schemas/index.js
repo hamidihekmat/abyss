@@ -5,7 +5,7 @@ export const typeDefs = gql`
     id: ID!
     name: String!
     description: String
-    release: String!
+    release: String
     rating: Float
     image: String!
     platforms: [Platform!]

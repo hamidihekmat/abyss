@@ -1,15 +1,21 @@
 import styled from '@emotion/styled';
 import { useState } from 'react';
+import { useRouter } from 'next/router';
+
 function Nav() {
+  const router = useRouter();
   const [search, setSearch] = useState('');
   const handleSubmit = (event) => {
     event.preventDefault();
-    console.log(search);
+    router.push({
+      pathname: '/search',
+      query: { name: search },
+    });
     setSearch('');
   };
   return (
     <StyledNav>
-      <h2>Abyss</h2>
+      <h2 onClick={() => router.push('/')}>Abyss</h2>
       <form onSubmit={handleSubmit}>
         <input
           type="text"
@@ -30,6 +36,7 @@ const StyledNav = styled.div`
   text-align: center;
   h2 {
     font-weight: bold;
+    cursor: pointer;
   }
   input {
     width: 30%;
