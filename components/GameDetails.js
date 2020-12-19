@@ -30,56 +30,60 @@ function GameDetails({ id, handleToggle }) {
     },
   });
   return (
-    <CardShadow onClick={handleToggle}>
-      {data && (
-        <Detail layoutId={id}>
-          <Stats>
-            <div className="rating">
-              <h3>{data.game.name}</h3>
-              <p>Rating: {data.game.rating}</p>
-            </div>
-            <Info>
-              <h3>Platforms</h3>
-              <Platforms>
-                {data.game.platforms.map((platform) => (
+    <>
+      {!loading && (
+        <CardShadow onClick={handleToggle}>
+          {data && (
+            <Detail layoutId={id}>
+              <Stats>
+                <div className="rating">
+                  <h3>{data.game.name}</h3>
+                  <p>Rating: {data.game.rating}</p>
+                </div>
+                <Info>
+                  <h3>Platforms</h3>
+                  <Platforms>
+                    {data.game.platforms.map((platform) => (
+                      <Image
+                        src={getIcon(platform.name)}
+                        width={'25px'}
+                        height={'25px'}
+                        alt={platform.name}
+                        key={platform.id}
+                      />
+                    ))}
+                  </Platforms>
+                </Info>
+              </Stats>
+              <Media>
+                <Image
+                  src={data.game.image}
+                  alt={data.game.name}
+                  width={800}
+                  height={600}
+                  layout="responsive"
+                />
+              </Media>
+              <Description>
+                <p>{data.game.description}</p>
+              </Description>
+              <div className="gallery">
+                {data.game.screenShots.map((img) => (
                   <Image
-                    src={getIcon(platform.name)}
-                    width={'25px'}
-                    height={'25px'}
-                    alt={platform.name}
-                    key={platform.id}
+                    key={img.id}
+                    src={img.image}
+                    width={img.width}
+                    height={img.height}
+                    layout="responsive"
+                    alt="game"
                   />
                 ))}
-              </Platforms>
-            </Info>
-          </Stats>
-          <Media>
-            <Image
-              src={data.game.image}
-              alt={data.game.name}
-              width={800}
-              height={600}
-              layout="responsive"
-            />
-          </Media>
-          <Description>
-            <p>{data.game.description}</p>
-          </Description>
-          <div className="gallery">
-            {data.game.screenShots.map((img) => (
-              <Image
-                key={img.id}
-                src={img.image}
-                width={img.width}
-                height={img.height}
-                layout="responsive"
-                alt="game"
-              />
-            ))}
-          </div>
-        </Detail>
+              </div>
+            </Detail>
+          )}
+        </CardShadow>
       )}
-    </CardShadow>
+    </>
   );
 }
 
